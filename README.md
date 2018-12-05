@@ -1,5 +1,5 @@
 # gilded-rose
-MY Take on the GildedRose Kata
+My take on the GildedRose Kata
 
 Code base is in C# using .Net Core 2.1
 
