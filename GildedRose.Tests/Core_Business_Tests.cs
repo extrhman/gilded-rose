@@ -13,11 +13,11 @@ namespace GildedRose.Tests
         {
             var items = new List<Item>()
             {
-                new Item { Name = "Test Item", Quality = 10, SellIn = 0}
+                new Item("Test Item", 0, 10)
             };
 
-            var ruleset = new Rules();
-            ruleset.UpdateQuality(items);
+            var ruleset = new Work();
+            ruleset.UpdateInventory(items);
 
             Assert.IsTrue(items[0].Quality == 8);
         }
@@ -27,11 +27,11 @@ namespace GildedRose.Tests
         {
             var items = new List<Item>()
             {
-                new Item { Name = "Test Item", Quality = 0, SellIn = 1}
+                new Item("Test Item", 1, 0)
             };
 
-            var ruleset = new Rules();
-            ruleset.UpdateQuality(items);
+            var ruleset = new Work();
+            ruleset.UpdateInventory(items);
 
             Assert.IsTrue(items[0].Quality == 0);
         }
@@ -41,25 +41,25 @@ namespace GildedRose.Tests
         {
             var items = new List<Item>()
             {
-                new Item { Name = "Test Item", Quality = 1, SellIn = 0}
+                new Item("Test Item", 0, 1)
             };
 
-            var ruleset = new Rules();
-            ruleset.UpdateQuality(items);
+            var ruleset = new Work();
+            ruleset.UpdateInventory(items);
 
             Assert.IsTrue(items[0].Quality == 0);
         }
 
         [TestMethod]
-        public void Quality_increases_by_age_for_aged_brie()
+        public void Quality_increases_by_age_for_aged_item()
         {
             var items = new List<Item>()
             {
-                new Item { Name = "Aged Brie", Quality = 0, SellIn = 2}
+                new Item("Aged Brie", 2, 0)
             };
 
-            var ruleset = new Rules();
-            ruleset.UpdateQuality(items);
+            var ruleset = new Work();
+            ruleset.UpdateInventory(items);
 
             Assert.IsTrue(items[0].Quality == 1);
         }
@@ -69,82 +69,82 @@ namespace GildedRose.Tests
         {
             var items = new List<Item>()
             {
-                new Item { Name = "Aged Brie", Quality = 50, SellIn = 20}
+                new Item("Aged Brie", 20, 50)
             };
 
-            var ruleset = new Rules();
-            ruleset.UpdateQuality(items);
+            var ruleset = new Work();
+            ruleset.UpdateInventory(items);
 
             Assert.IsTrue(items[0].Quality == 50);
         }
 
         [TestMethod]
-        public void Legendary_item_sulfuras_never_reduces_quality_or_expires()
+        public void Legendary_item_never_reduces_quality_or_expires()
         {
             var items = new List<Item>()
             {
-                new Item { Name = "Sulfuras, Hand of Ragnaros", Quality = 80, SellIn = 0}
+                new Item("Sulfuras, Hand of Ragnaros", 0, 80)
             };
 
-            var ruleset = new Rules();
-            ruleset.UpdateQuality(items);
+            var ruleset = new Work();
+            ruleset.UpdateInventory(items);
 
             Assert.IsTrue(items[0].Quality == 80);
             Assert.IsTrue(items[0].SellIn == 0);
         }
 
         [TestMethod]
-        public void Quality_increase_by_age_for_backstage_passes()
+        public void Quality_increase_by_age_for_passes()
         {
             var items = new List<Item>()
             {
-                new Item { Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 0, SellIn = 20}
+                new Item("Backstage passes to a TAFKAL80ETC concert", 20, 0)
             };
 
-            var ruleset = new Rules();
-            ruleset.UpdateQuality(items);
+            var ruleset = new Work();
+            ruleset.UpdateInventory(items);
 
             Assert.IsTrue(items[0].Quality == 1);
         }
 
         [TestMethod]
-        public void Quality_increase_by_2_by_age_for_backstage_passes_when_sellin_less_then_or_equal_to_10()
+        public void Quality_increase_by_2_by_age_for_passes_when_sellin_less_then_or_equal_to_10()
         {
             var items = new List<Item>()
             {
-                new Item { Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 0, SellIn = 10}
+                new Item("Backstage passes to a TAFKAL80ETC concert", 10, 0)
             };
 
-            var ruleset = new Rules();
-            ruleset.UpdateQuality(items);
+            var ruleset = new Work();
+            ruleset.UpdateInventory(items);
 
             Assert.IsTrue(items[0].Quality == 2);
         }
 
         [TestMethod]
-        public void Quality_increase_by_3_by_age_for_backstage_passes_when_sellin_less_then_or_equal_to_5()
+        public void Quality_increase_by_3_by_age_for_passes_when_sellin_less_then_or_equal_to_5()
         {
             var items = new List<Item>()
             {
-                new Item { Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 0, SellIn = 5}
+                new Item("Backstage passes to a TAFKAL80ETC concert", 5, 0)
             };
 
-            var ruleset = new Rules();
-            ruleset.UpdateQuality(items);
+            var ruleset = new Work();
+            ruleset.UpdateInventory(items);
 
             Assert.IsTrue(items[0].Quality == 3);
         }
 
         [TestMethod]
-        public void Quality_goes_to_zero_for_backstage_passes_when_sellin_equals_0()
+        public void Quality_goes_to_zero_for_passes_when_sellin_equals_0()
         {
             var items = new List<Item>()
             {
-                new Item { Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 10, SellIn = 0}
+                new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10)
             };
 
-            var ruleset = new Rules();
-            ruleset.UpdateQuality(items);
+            var ruleset = new Work();
+            ruleset.UpdateInventory(items);
 
             Assert.IsTrue(items[0].Quality == 0);
         }
