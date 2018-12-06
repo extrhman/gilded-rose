@@ -16,6 +16,9 @@
                 case "Backstage passes to a TAFKAL80ETC concert":
                     _item = new PassItem(item);
                     break;
+                case "Conjured Mana Cake":
+                    _item = new ConjuredItem(item);
+                    break;
                 default:
                     break;
             }

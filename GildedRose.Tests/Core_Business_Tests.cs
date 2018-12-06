@@ -148,5 +148,24 @@ namespace GildedRose.Tests
 
             Assert.IsTrue(items[0].Quality == 0);
         }
+
+        [TestMethod]
+        public void Conjured_item_quality_degrades_twice_as_fast_as_standard_items()
+        {
+            var items = new List<Item>()
+            {
+                new Item("Conjured Mana Cake", 1, 10)
+            };
+
+            var ruleset = new Work();
+            ruleset.UpdateInventory(items);
+
+            Assert.IsTrue(items[0].Quality == 8);
+
+            //Standard items decrease quality by 2 when sellin equals 0
+            //Therefore Conjured items should decrease by 4 since they decrease twice as fast
+            ruleset.UpdateInventory(items);
+            Assert.IsTrue(items[0].Quality == 4);
+        }
     }
 }
